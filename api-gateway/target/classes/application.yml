@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: service-oauth
+          uri: lb://service-oauth
+          predicates:
+            - Path=/service-oauth/**
+          filters:
+            - StripPrefix=1
+        - id: client-service
+          uri: lb://client-service
+          predicates:
+            - Path=/client-service/**
+          filters:
+            - StripPrefix=1
+        - id: account-client
+          uri: lb://account-service
+          predicates:
+            - Path=/account-service/**
+          filters:
+            - StripPrefix=1
